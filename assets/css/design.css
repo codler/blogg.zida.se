@@ -1,0 +1,195 @@
+/* Made by Han Lin Yap (aka Codler) http://www.zencodez.net/ 
+ * Created: 2010-03-07
+ * Last modified: 8th april 2010 v0.2
+ * 7th april 2010 v0.1 
+ */
+body {
+	background-color: #AAAAAA;
+	font-family: Cambria, serif;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: normal;
+	letter-spacing: normal;
+	line-height: 1.4em;
+}
+
+a {
+	color: Tomato;
+	cursor: pointer;
+}
+
+nav {
+	line-height: 28px;
+	position:absolute;
+	left: 0px;
+	top: 0px;
+	min-height: 30px;
+	width: 100%;
+	
+	background: #AAAAAA -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(170,170,170)),
+		color-stop(0.10, rgb(221,221,221)),
+		color-stop(0.10, rgb(207,207,207)),
+		color-stop(0.60, rgb(238,238,238))
+	);
+	background: #AAAAAA -moz-linear-gradient(
+		center bottom,
+		rgb(170,170,170) 0%,
+		rgb(221,221,221) 10%,
+		rgb(207,207,207) 10%,
+		rgb(238,238,238) 60%
+	);
+
+}
+nav li {
+	list-style: none;
+	display: inline;
+}
+
+#worksheet {
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	overflow: auto;
+	width: 100%;
+	background-color: #DDD;
+}
+
+#worksheet-size {
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	height: 1px;
+	width: 1px;
+}
+
+#workspace {
+	position:absolute;
+	top: 100px;
+	left: 100px;
+	background-color: #FFF;
+}
+
+#notice {
+	display: none;
+	font-size: 14px;
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+	top: 30px;
+	width: 100%;
+	z-index: 2000;
+}
+#notice span {
+	background-color: yellow;
+}
+
+#tool {
+	border: 3px solid #333;
+	font-size: 14px;
+	overflow: auto;
+	position:absolute;
+	min-height: 50px;
+	width: 200px;
+	z-index: 1499;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+#tool-dock {
+	background-color: #111;
+	color: #CCC;
+}
+
+.draghandler {
+	margin: 5px;
+	background: #bbbbbb;
+	background: #bbbbbb -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(170,170,170)),
+		color-stop(0.10, rgb(221,221,221)),
+		color-stop(0.10, rgb(207,207,207)),
+		color-stop(0.60, rgb(238,238,238))
+	);
+	background: #bbbbbb -moz-linear-gradient(
+		center bottom,
+		rgb(170,170,170) 0%,
+		rgb(221,221,221) 10%,
+		rgb(207,207,207) 10%,
+		rgb(238,238,238) 60%
+	);
+}
+.draghandler:before {
+	content: " ˅ ";
+}
+.draghandler.hidden:before {
+	content: " ^ ";
+}
+
+.tool-section-content {
+	background-color: #FFF;
+	margin: 0 5px;
+	max-height: 250px;
+	overflow: auto;
+}
+
+.tool-component {
+	cursor: move;
+	display: block;
+	border-bottom: 1px solid #DDD;
+	min-height: 27px;
+}
+div.tool-component:hover {
+	border: 1px solid #AAA;
+	min-height: 26px;
+}
+div.tool-component:hover:after {
+	content: " » dra";
+}
+
+.component[layer_id] {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+div.component:hover {
+	border: 1px solid red;
+	margin: -1px 0 0 -1px;
+}
+
+.layer {
+	background-color: #DDD;
+	border-bottom: 1px solid #EEE;
+}
+.layer.selected {
+	background-color: #AAA;
+}
+
+.input-number {
+	width: 40px;
+	text-align: right;
+}
+
+.input-color {
+	vertical-align: top;
+	width: 60px;
+}
+
+.input-color-box {
+	border: 2px solid #000;
+	display: inline-block;
+	margin-right: 2px;
+	height: 15px; 
+	width: 15px; 
+}
+
+.dialog {
+	display: none;
+}

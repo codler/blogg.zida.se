@@ -1,0 +1,37 @@
+/* Made by Han Lin Yap (aka Codler) http://www.zencodez.net/ 
+ * Created: 2010-05-07
+ * Last modified: 7th may 2010 v1.0
+ */
+
+#zida_topbar  ~ #wrapper { padding-top: 20px; } /* CSS3 */
+#zida_topbar { 
+	-o-box-shadow: 0px 0px 10px #B4B4B4;
+	-moz-box-shadow: 0px 0px 10px #B4B4B4;
+	-webkit-box-shadow: 0px 0px 10px #B4B4B4;
+	box-shadow: 0px 0px 10px #B4B4B4; /* CSS3 */
+	background-color:#f8f8f8; border-bottom: 1px solid #eee; font: bold 14px Helvetica, monospace, san-serif; height: 20px; padding: 3px 10px 0; position: fixed; width: 100%; z-index: 100; }
+#zida_topbar a { color: #003B5F; text-decoration: none; }
+#zida_topbar li { float: left; list-style: none; margin-right: 20px; }
+
+#zida_quickbar {}
+#zida_adcontent { position: absolute; top: 0px; right: -200px; }
+
+
+body {
+	font-family: Helvetica, monospace, san-serif;;
+}
+
+#easyTooltip{ 
+	background-color: #ffff90;
+	border: 1px solid #DDD;
+	font-family: sans-serif;
+	font-size: 10px;
+	line-height: 16px;
+	max-width: 300px;
+	padding: 3px;
+	z-index: 2001;
+	
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+} 

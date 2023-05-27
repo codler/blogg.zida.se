@@ -1,0 +1,19 @@
+﻿1. Config.php
+Sätta Debug till false
+
+2. Komprimera
+assets/js/design.init.js 
+assets/js/design.functions.js
+
+3. Kontrollera databasens schema (tabeller osv)
+
+4. ändra location.href i design.init.js (devblogg2 till blogg)
+
+
+
+
+
+
+
+
+sist: gör en zip av bloggzida o sql av databasen

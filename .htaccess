@@ -1,0 +1,34 @@
+<Files ~ "^.(htaccess|htpasswd)$">
+deny from all
+</Files>
+<IfModule mod_rewrite.c>
+# Allow symbolic links
+Options +FollowSymLinks
+
+# UTF-8
+AddDefaultCharset UTF-8
+
+RewriteEngine On
+# Expel IE 6
+RewriteCond %{HTTP_USER_AGENT} "^Mozilla/4.0 \(compatible; MSIE 6.0;"
+RewriteRule ^.* - [F,L]
+
+#   Temporary upgrade
+#   RewriteEngine on
+#   RewriteCond %{REQUEST_URI} !/upgrade.html$
+#   RewriteCond %{REMOTE_HOST} !^83\.183\.172\.114
+#   RewriteRule $ /upgrade.html [R=302,L]
+
+#   Remove www by redirecting
+#   RewriteCond %{HTTP_HOST} ^www.blogg.zida.se [NC]
+#   RewriteRule ^(.*)$ http://blogg.zida.se/$1 [R=301,L]
+
+# Fancy url. All to index.php file
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# Same cookie for all subdomain
+php_value session.cookie_domain .zida.se

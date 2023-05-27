@@ -1,0 +1,20 @@
+Verktyget
+
+layout/design permission (public/private?)
+
+
+
+Verktyget
+	Font, Länk färg
+
+			Hämta lager från en annan design
+
+Bildhantering - mappar
+
+w8 on jqueryui 1.9
+	tooltips
+
+
+W8 on fb
+	invite-fbml
+	upload-graph-api (javascript sdk)

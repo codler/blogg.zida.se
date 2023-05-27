@@ -1,0 +1,5 @@
+class - underscore
+methods - underscore
+functions - camelcase
+variable - underscore
+constants - uppercase and underscore
