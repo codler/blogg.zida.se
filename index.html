@@ -1,0 +1,644 @@
+
+<!DOCTYPE html>
+<html lang="sv" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<meta charset="utf-8" />
+<title>Blogg*zida v0.7 - Logga in</title>
+
+	<!-- Assets - CSS -->
+	<link rel="stylesheet" type="text/css" href="/yap-goodies/css/global.css?1477695698" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/common.css?1477695693" />
+	
+	<!-- Assets - Javascript -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="/external/jquery-validate/jquery.validate.min.js?1477695697"></script>
+	<script src="/external/jquery-validate/localization/messages_se.js?1477695712"></script>
+	<script src="/external/easyTooltip.js?1477695690"></script>
+	<script src="/external/jquery.lazyload.js?1477695691"></script>
+	<style>
+/* === Tags === */
+body {
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #ffffff),color-stop(1, #e0f8ff)); /* Safari & Chrome */background-image: -moz-linear-gradient(top,#e0f8ff,#ffffff); /* Firefox 3.6 */filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e0f8ff', endColorstr='#ffffff'); /* IE6 & IE7 */-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e0f8ff', endColorstr='#ffffff')"; /* IE8 */}
+
+footer {
+	margin-top: 100px;
+}
+
+/* == links == */
+a {
+	color: #003b9f;
+	text-decoration: none;
+}
+a:visited {
+	color: #003b5f;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+/* a[href^="http://"] {
+	background: transparent url(/assets/images/ex.gif) repeat-y scroll right 0;
+	padding-right: 13px;
+}
+a[href^="http://"]:hover {
+	background-position:right 200px;
+} */
+
+/* == table == */
+table {
+	width: 100%;
+}
+td {
+	border: 1px solid #aaaaaa;
+	padding: 2px;
+}
+
+/* == form == */
+label {
+	color: #aaaaaa;
+	display:block;
+	font-weight: bold;
+	margin: 6px 0 2px 0;
+}
+label:hover {
+	color: #666666;
+}
+
+input {
+	display: block;
+	font-size: 14px;
+	height: 25px;
+	width: 200px;
+}
+input:focus {
+	background-color: #f0ffff;
+}
+
+textarea {
+	display: block;
+	font-size: 14px;
+	height: 200px;
+	width: 98%;
+}
+input[type='submit'] {
+	border: 1px solid #ffffe0;
+	background-color: #e0f8ff;
+	height: 30px;
+	margin: 10px 0;
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #ffffe0),color-stop(1, #e0f8ff)); /* Safari & Chrome */background-image: -moz-linear-gradient(top,#e0f8ff,#ffffe0); /* Firefox 3.6 */filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e0f8ff', endColorstr='#ffffe0'); /* IE6 & IE7 */-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e0f8ff', endColorstr='#ffffe0')"; /* IE8 */	-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;	-o-box-shadow: 0px 0px 10px #B4B4B4;
+	-moz-box-shadow: 0px 0px 10px #B4B4B4;
+	-webkit-box-shadow: 0px 0px 10px #B4B4B4;
+	box-shadow: 0px 0px 10px #B4B4B4; /* CSS3 */
+}
+
+
+/* === Ids === */
+#wrapper-inner {
+	background: url("/assets/images/footer_hill2.png") repeat-x 50% 150%;
+	margin: 5px auto;
+	width: 80%;
+	min-height: 300px;
+	max-width: 1000px;
+}
+
+
+/* === Classes === */
+.time {
+	font-size: 10px;
+}
+
+span.success , span.error , .notice {
+	border: 1px solid #4D4D4D;
+	display:block;
+	font-size: 14px;
+	margin: 0 auto;
+	padding: 10px;
+	text-align:center;
+	max-width: 500px;
+	-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;	-o-box-shadow: 0px 0px 10px #B4B4B4;
+	-moz-box-shadow: 0px 0px 10px #B4B4B4;
+	-webkit-box-shadow: 0px 0px 10px #B4B4B4;
+	box-shadow: 0px 0px 10px #B4B4B4; /* CSS3 */
+}
+.success {
+	background-color:#CFF9A6;
+	font-weight: bold;
+}
+.error {
+	background-color:#FFD5D5;
+	font-weight: bold;
+}
+.notice {
+	background-color: lightyellow;
+	font-style: italic;
+}
+
+.box {
+	border: 1px solid #DDD; 
+	display: inline-block;
+	padding: 1%;
+	vertical-align: top;
+	
+	/* CSS3 */
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.08, rgb(237,237,237)),
+		color-stop(0.25, rgb(245,245,245)),
+		color-stop(0.46, rgb(255,255,255))
+	);
+	background-image: -moz-linear-gradient(
+		center bottom,
+		rgb(237,237,237) 8%,
+		rgb(245,245,245) 25%,
+		rgb(255,255,255) 46%
+	);
+	
+	filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#ededed'); /* IE6 & IE7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#ededed')"; /* IE8 */
+	
+	-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+.box-col-2 {
+	width: 47%;
+}
+
+/* === define === */
+header nav, footer {
+	border: 3px solid #aaa;
+	background-color: #4D4D4D;
+	height: 30px;
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #111111),color-stop(1, #4D4D4D)); /* Safari & Chrome */background-image: -moz-linear-gradient(top,#4D4D4D,#111111); /* Firefox 3.6 */filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4D4D4D', endColorstr='#111111'); /* IE6 & IE7 */-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4D4D4D', endColorstr='#111111')"; /* IE8 */	-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+header nav a, footer a {
+	color: #f8f8f8;
+	display: block;
+	float:left;
+	font-weight: bold;
+	padding: 7px 5% 3px;
+}
+header nav a:visited, footer a:visited {
+	color: #f8f8f8;
+}
+header nav a:hover, footer a:hover {
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #666666),color-stop(1, #4D4D4D)); /* Safari & Chrome */background-image: -moz-linear-gradient(top,#4D4D4D,#666666); /* Firefox 3.6 */filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4D4D4D', endColorstr='#666666'); /* IE6 & IE7 */-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4D4D4D', endColorstr='#666666')"; /* IE8 */}
+
+/* = design page = */
+.editable:hover:after {
+	content: " » ändra";
+}
+</style>
+<!--[if lt IE 8]>
+<style>
+.box {
+	display: inline;
+}
+</style>
+<![endif]-->
+<script>
+$().ready(function () {
+	$("#register").addClass("required");
+	$("#add-blog").addClass("required");
+	$("#write-blog").addClass("required");
+	$("#upload-form").addClass("required");
+	$("#recovery-password").addClass("required");
+	$("#change-password").addClass("required");
+	$("#change-name").addClass("required");
+	$("#change-email").addClass("required");
+	$("#add-design").addClass("required");
+	// validate
+	$("#register").validate({
+		rules : {
+			email : {
+				//required: true,
+				email: true,
+				maxlength : 50,
+				remote : {
+					url: "/fetch",
+					type: "post",
+					data: {
+						type: 'exist-email',
+						email: function() {
+							return $("#register input[name=email]").val();
+						}
+					}
+				}
+			},
+			password : {
+				minlength : 6
+			},
+			name : {
+				minlength : 4,
+				maxlength : 40,
+				remote : {
+					url: "/fetch",
+					type: "post",
+					data: {
+						type: 'exist-name',
+						name: function() {
+							return $("#register input[name=name]").val();
+						}
+					}
+				}
+			}
+		},
+		messages: {
+			email: {
+				remote: jQuery.validator.format("{0} är upptagen.")
+			},
+			name: {
+				remote: jQuery.validator.format("{0} är upptagen.")	
+			}
+		}
+
+	});
+	
+	// main
+	$("#add-blog").validate({
+		rules : {
+			name : {
+				minlength : 4,
+				maxlength : 100
+			},
+			url : {
+				minlength : 6,
+				maxlength : 100,
+				remote : {
+					url: "/fetch",
+					type: "post",
+					data: {
+						type: 'exist-url',
+						url: function() {
+							return $("#add-blog input[name=url]").val();
+						}
+					}
+				}
+			}
+		},
+		messages: {
+			url: {
+				remote: jQuery.validator.format("{0} är upptagen.")
+			}
+		}
+	});
+	
+	// write-blog
+	$("#write-blog").validate({
+		rules : {
+			headline : {
+				minlength : 3,
+				maxlength : 255
+			},
+			content : {
+				minlength : 6
+			}
+		}
+	});
+		
+	// account
+	$("#recovery-password").validate({
+		rules : {
+			'new-password' : {
+				minlength : 6
+			},
+			'new2-password' : {
+				equalTo : "#recovery-password input[name='new-password']"
+			}			
+		}
+	});
+	$("#change-password").validate({
+		rules : {
+			'old-password' : {
+				minlength : 6
+			},
+			'new-password' : {
+				minlength : 6
+			},
+			'new2-password' : {
+				equalTo : "#change-password input[name='new-password']"
+			}			
+		}
+	});
+	$("#change-name").validate({
+		rules : {
+			name : {
+				minlength : 4,
+				maxlength : 40,
+				remote : {
+					url: "/fetch",
+					type: "post",
+					data: {
+						type: 'exist-name',
+						name: function() {
+							return $("#change-name input[name=name]").val();
+						}
+					}
+				}
+			}		
+		},
+		messages: {
+			name: {
+				remote: jQuery.validator.format("{0} är upptagen.")	
+			}
+		}
+	});
+	$("#change-email").validate({
+		rules : {
+			email : {
+				//required: true,
+				email: true,
+				maxlength : 50,
+				remote : {
+					url: "/fetch",
+					type: "post",
+					data: {
+						type: 'exist-email',
+						email: function() {
+							return $("#change-email input[name=email]").val();
+						}
+					}
+				}
+			}	
+		},
+		messages: {
+			email: {
+				remote: jQuery.validator.format("{0} är upptagen.")	
+			}
+		}
+	});
+	// design
+	$("#add-design").validate({
+		rules : {
+			name : {
+				minlength : 4,
+				maxlength : 100
+			}	
+		}
+	});
+	
+	// settings
+	$("#add-share-blog").validate({
+		rules : {
+			name : {
+				minlength : 4,
+				maxlength : 40,
+				remote : {
+					url: "/fetch",
+					type: "post",
+					data: {
+						type: 'not-exist-name',
+						name: function() {
+							return $("#add-share-blog input[name=name]").val();
+						}
+					}
+				}
+			}
+		},
+		messages: {
+			name: {
+				remote: jQuery.validator.format("Användaren {0} existerar inte.")	
+			}
+		}
+	});
+	
+	$("#delete-blog").submit(function () {
+		return confirm("Är du säker på att ta bort bloggen? Det går ej att ångra!");
+	});
+	
+	// Fancy Url
+	$('#add-blog input[name=name]').keyup(fancyUrlcustom);
+	$('#add-blog input[name=name]').change(fancyUrlcustom);
+	function fancyUrlcustom() {
+		var s = $(this).val();
+		s = trimUrl(s);
+		$('#add-blog input[name=url]').val(s);
+	}
+	
+	$('#add-blog input[name=url]').keypress(fancyUrl);
+	$('#add-blog input[name=url]').keyup(fancyUrl);
+	$('#add-blog input[name=url]').change(fancyUrl);
+	function fancyUrl() {
+		var s = $(this).val();
+		s = trimUrl(s);
+		$(this).val(s);
+	}
+	
+	function trimUrl(url) {
+		url = url.replace(/å/gi,'a');
+		url = url.replace(/ä/gi,'a');
+		url = url.replace(/ö/gi,'o');
+		url = url.replace(/[^a-zA-Z0-9]/g,'');
+		return url;
+	}
+	
+	// forgot toggle / facebook toggle
+	$("#forgot-toggle, #facebook-invite-toggle, #add-blog-toggle").click(function () {
+		$(this).hide("fast").next().show("fast");
+		return false;
+	}).next().hide();
+	
+	// register "toggle"
+	$("#register-name").hide().prev().hide();
+	$("#register-email").focus(function() {
+		$("#register-name").show().prev().show();
+	});
+		
+	// gallery
+	$('#file-gallery a:not(.add , .delete), #flickr-gallery a:not(.add , .delete)').each(function () {
+		var img = $(this).find('img');
+		if (this.getElementsByTagName('img')[0].naturalWidth > 540) {
+			img.attr('width', 540);
+		}
+	});
+	$('#file-gallery a:not(.add , .delete), #file-gallery div, #flickr-gallery a:not(.add , .delete), #flickr-gallery div').live('mouseover',function (event) {
+	if (!$(event.relatedTarget).is('div.file-gallery-button'))
+		if ($(this).next().is('div')) {
+			var position = $(this).offset();
+			var positionGallery = $(this).parent().offset();
+			var top = position.top - positionGallery.top + 3 + $(this).parent().scrollTop();
+			var left = position.left - positionGallery.left + 3 + $(this).parent().scrollLeft();
+			$(this).next().css({'top':top,'left':left}).show();
+		}
+	});
+	$('#file-gallery a:not(.add , .delete), #flickr-gallery a:not(.add , .delete)').live('mouseout',function (event) {
+		if (!$(event.relatedTarget).is('div.file-gallery-button')&&!$(event.relatedTarget).is('div.flickr-gallery-button'))
+			if ($(this).next().is('div'))
+				$(this).next().hide();
+	});
+	$('#file-gallery div, #flickr-gallery div').live('mouseover',function () {
+	});
+	
+	$('#file-gallery div, #flickr-gallery div').live('mousedown',function (event) {
+		event.stopImmediatePropagation();
+		if ($(this).prev().is('a')&&$(event.target).hasClass('add'))
+			editor.insertHtml($(this).prev().html());
+			
+		if ($(this).prev().is('a')&&$(event.target).hasClass('delete')&&$(this).parent().attr('id')=='file-gallery') {
+			var choice = confirm("Vill du ta bort bilden?");
+			if (choice) {
+				var selected = $(this);
+				$.post("/fetch", 
+					{ type: "delete-image", url: $(this).prev()[0].pathname.substring('/images/'.length) },
+					function(data){
+						selected.prev().remove();
+						selected.remove();
+					}
+				);
+			}
+		} else if ($(this).parent().attr('id')=='flickr-gallery') {
+			$(this).prev().remove();
+			$(this).remove();
+		}
+	});
+	
+	
+	$("form").submit(function () {
+		if ($(this).validate().form())
+			$("input:submit", $(this)).attr("disabled", "disabled");
+	});
+	
+	// lazy load
+	$("img").lazyload({ threshold : 200 });
+
+});
+</script>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body id="layout-one-column">
+<a name="top"></a>
+<nav id="zida_topbar">
+	<ul>
+		<li>© 2010 <a href="http://www.zencodez.net/">Han Lin Yap</a></li>
+			</ul>
+</nav>
+<nav id="zida_quickbar"></nav>
+<div id="wrapper">
+	<div id="wrapper-inner">
+<header>
+<a href="/"><img src="/assets/images/logo.png" /></a>
+<nav>
+<a href="/news.html">Nyheter</a>
+<a href="http://metroroll.zencodez.net/v3/Kontakta.yap">Kontakta mig</a>
+</nav>
+
+<br />
+</header><!-- Facebook start -->
+<div id="fb-root"></div>
+<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId  : '2dce67debb1d376f0674cdda6e54d16a',
+			status : true, // check login status
+			cookie : true, // enable cookies to allow the server to access the session
+			xfbml  : true  // parse XFBML
+		});
+		
+		$("#fb-logout").click(function () {
+			FB.logout();
+		});
+
+		FB.Event.subscribe('auth.sessionChange', function(response) {
+			if (response.session) {
+				// A user has logged in, and a new cookie has been saved
+				window.location.reload();
+			} else {
+				// The user has logged out, and the cookie has been cleared
+				window.location.reload();
+			}
+		}); 
+	};
+
+	(function() {
+		var e = document.createElement('script');
+		e.src = document.location.protocol + '//connect.facebook.net/sv_SE/all.js';
+		e.async = true;
+		document.getElementById('fb-root').appendChild(e);
+	}());
+</script>
+<!-- Facebook end -->
+<div class="notice"><b>Om Blogg*zida</b> - skapa en egen design och få den till din blogg utan att kunna något om kodning. Detta kan du genom designverktyget som jag har utvecklat!</div>
+<br/>
+<div class="box box-col-2">
+	<h1>Logga in</h1>
+<form action="/submit" method="post" >
+<input  type="hidden" id="l1029585390" name="yap_goodies_submit_type" value="login"/>
+<label for="l1633981063">E-post</label>
+<input  type="hidden" id="l1446694776" name="yap_goodies_remember_name" value="true"/>
+<input  type="text" id="l1633981063" name="name" />
+<label for="l1466985631">Lösenord</label>
+<input  type="password" id="l1466985631" name="password" />
+<input  type="submit" id="l1359536818" name="" value="Logga in"/>
+</form>
+		<fb:login-button show-faces="true" perms="photo_upload,user_photos,email,publish_stream"></fb:login-button>
+		<a id="forgot-toggle">Glömt lösenord?</a>
+	<span>
+	<h1>Glömt lösenord</h1>
+<form action="/submit" method="post" >
+<input  type="hidden" id="l1105934982" name="yap_goodies_submit_type" value="forgot"/>
+<label for="l654885964">E-post</label>
+<input  type="hidden" id="l135239433" name="yap_goodies_remember_name" value="true"/>
+<input  type="text" id="l654885964" name="name" />
+<input  type="submit" id="l2112071943" name="" value="Skicka nytt lösenord"/>
+</form>
+	</span>
+</div>
+<div class="box box-col-2">
+	<h1>Registrera</h1>
+<form action="/submit" method="post" id="register">
+<input  type="hidden" id="l1902411182" name="yap_goodies_submit_type" value="register"/>
+<label for="register-email">E-post</label>
+<input  type="email" id="register-email" name="email" />
+<label for="l621676415">Lösenord</label>
+<input  type="password" id="l621676415" name="password" />
+<label for="register-name">Smeknamn</label>
+<input  type="text" id="register-name" name="name" />
+<input  type="submit" id="l353052978" name="" value="Registrera"/>
+</form>
+</div>
+<script>
+(function () {
+	// tooltips
+	$('#register-name').easyTooltip({ content: 'Minst 4 tecken och endast a-z0-9 är tillåten.', clickRemove: true });
+
+})();
+</script>
+<!--[if lt IE 8]>
+<div id="browser_msie">
+<p>Du använder Internet Explorer<br />
+Rekommenderar att du använder någon av följande<br />
+<a href="http://www.mozilla.com?from=sfx&amp;uid=188254&amp;t=561"><img border="0" width="128" height="128" src="/yap-goodies/images/Firefox.png" title="Firefox" /></a>
+<a href="http://www.google.com/chrome"><img border="0" width="128" height="128" src="/yap-goodies/images/Chrome.png" title="Chrome" /></a>
+</p>
+</div>
+<![endif]-->
+<!--<a href="http://www.opera.com/"><img border="0" width="128" height="128" src="/yap-goodies/images/Opera.png" title="Opera" /></a>
+<a href="http://www.apple.com/safari/"><img border="0" width="128" height="128" src="/yap-goodies/images/Safari.png" title="Safari" /></a>-->
+
+<div class="box box-col-2">
+	<h1>Unikt med Blogg*zida</h1>
+	<ul>
+		<li>Blogga tillsammans</li>
+		<li>Kraftfull designverktyg</li>
+		<li>Användaren är prio!</li>
+	</ul>
+</div>
+<div class="box box-col-2">
+	<h2><a href="/design_preview.html">Testa designverktyget</a></h2>
+</div><footer>
+<a href="http://www.zencodez.net">Copyright © 2010 Han Lin Yap</a>
+</footer>
+	</div><!-- wrapper-inner -->
+</div><!-- wrapper -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-1944741-4");
+pageTracker._setDomainName("blogg.zida.se");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

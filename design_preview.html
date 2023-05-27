@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<title>Blogg design verktyg 0.6 - skapad av Han Lin Yap</title>
+
+	<!-- Assets - CSS -->
+	<link rel="stylesheet" type="text/css" href="/yap-goodies/css/global.css?1477695698" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/common.css?1477695693" />
+	<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/ui-lightness/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="/external/colorpicker/css/colorpicker.css?1477695703" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/design.css?1477695693" />
+	
+	<!-- Assets - Javascript -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="/external/jquery-validate/jquery.validate.min.js?1477695697"></script>
+	<script src="/external/jquery-validate/localization/messages_se.js?1477695712"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+	<script src="/external/json2.js?1477695691"></script>
+	<script src="/external/colorpicker/js/colorpicker.js?1477695704"></script>
+	<script src="/external/easyTooltip.js?1477695690"></script>
+	<script src="/yap-goodies/js-0.1.js?1477695692"></script>
+	<script src="/assets/js/design.init-0.6.min.js?1477695694"></script>
+	<script src="/assets/js/design.functions-0.6.min.js?1477695694"></script>
+	<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script type="text/javascript"> 
+<!--
+/* 
+V.0.4 changes
+Font-size setting
+
+V.0.3 changes
+Tooltip
+Integrate with blogg.
+
+V.0.2 changes
+Prevent selection while dragging
+Fix toolbar button was hidden when on small resolution screen.
+Added key interaction. able to move components px-by-px
+Fix colorpicker bug - restoring to original color did not change.
+*/
+
+-->
+</script>
+</head>
+<body>
+
+<nav>
+	<ul>
+		<li>
+	<!--<input type="checkbox" id="view_content" name="view_content" checked /><label for="view_content">Visa innehåll</label>--></li>
+		<li><a href="/">Tillbaka till Bloggen.</a></li>
+				<li>Yta:</li> 
+		<li>
+			<label for="worksheet_width">Bredd:</label>
+			<input class="input-number" type="text" id="worksheet_width" name="worksheet_width" value="800" />
+		</li>
+		<li>
+			<select class="unit">
+				<option value="px" selected>px</option>
+				<option value="%">%</option>
+			</select>
+		</li>
+		<li>
+			<label for="worksheet_height">Höjd:</label>
+			<input class="input-number" type="text" id="worksheet_height" name="worksheet_height" value="600" />
+		</li>
+		<li>
+			<select class="unit">
+				<option value="px" selected>px</option>
+				<option value="%">%</option>
+			</select>
+		</li>
+		<li><a id="settings-background">Bakgrund</a></li>
+		<li><input type="button" id="design-reset" name="reset" value="Nytt" /></li>
+		<li><input type="button" id="design-load" name="load" value="Ladda" 
+style="visibility: hidden;"/></li>
+		<li><input type="button" id="design-load-example" name="load-example" value="Ladda exempel" /></li>
+		<li>Preview mode</li>
+			</ul>
+</nav>
+<div id="notice"><span></span></div>
+<div id="tool">
+	<div id="tool-dock"><a>DOCK</a></div>
+	<div id="tool-section-component" class="tool-section">
+		<div class="draghandler"><a>Verktyg</a></div>
+		<div class="tool-section-content"></div>
+	</div>
+	<div id="tool-section-select" class=".tool-section">
+		<div class="draghandler"><a>Valda lager inställning</a></div>
+		<div class="tool-section-content"></div>
+	</div>
+	<div id="tool-section-layer" class=".tool-section">
+		<div class="draghandler"><a>Lager</a></div>
+		<div class="tool-section-content"></div>
+	</div>
+	<!--
+	<div id="tool-section-history" class=".tool-section">
+		<div class="draghandler"><a>History</a></div>
+		<div class="tool-section-content"></div>
+	</div>-->
+</div>
+<div id="worksheet">
+	<div id="workspace"></div>
+	<div id="worksheet-size">&nbsp;</div>
+</div>
+
+<div id="dialog-component-text" class="dialog" title="Komponent Text">
+	<textarea></textarea>
+</div>
+<div id="dialog-component-image" class="dialog" title="Komponent Bild">
+	<label for="url">Bild URL</label><input type="text" id="url" name="url" value="http://" />
+</div>
+<div id="dialog-component-list" class="dialog" title="Komponent Lista">
+	<table>
+	<thead>
+		<tr>
+			<th>URL</th>
+			<th>Namn</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<td></td>
+			<td><a>Mer</a></td>
+		</tr>
+	</tfoot>
+	<tbody>
+		<tr>
+			<td><input type="text" id="url" name="url" value="http://" /></td>
+			<td><input type="text" id="namn" name="namn" value="" /></td>
+		</tr>
+	</tbody>
+	</table>	
+</div>
+
+<div id="dialog-settings-background" class="dialog" title="Inställning - Bakgrund">
+	<p>Inre bakgrund</p>
+	<label for="inner-background">Bild URL</label><input type="text" id="inner-background" name="url" value="http://" />
+	<p>Yttre bakgrund</p>
+	<label for="outer-background">Bild URL</label><input type="text" id="outer-background" name="url" value="http://" />
+</div>
+
+<div id="dialog-settings-events" class="dialog" title="Inställning - Händelser">
+Tips, läs som en mening.
+	<table>
+	<thead>
+		<tr>
+			<th>Händelse</th>
+			<th>Effekt</th>
+			<th>Varaktighet</th>
+			<th>Layer</th>
+			<th>Ta bort</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<td>Vid 
+				<select id="events-event">
+				</select>
+			</td>
+			<td>
+				<select id="events-effect">
+				</select>
+			</td>
+			<td>
+				<select id="events-duration">
+				</select>
+			</td>
+			<td>
+				<select id="events-layer">
+				</select>
+			</td>
+			<td><a class="create">Skapa händelsen</a></td>
+		</tr>
+	</tfoot>
+	<tbody>
+		<tr>
+			<td>Vid 
+				<select class="events-event">
+				</select>
+			</td>
+			<td>
+				<select class="events-effect">
+				</select>
+			</td>
+			<td>
+				<select class="events-duration">
+				</select>
+			</td>
+			<td>
+				<select class="events-layer">
+				</select>
+			</td>
+			<td><a class="delete">Ta bort</a></td>
+		</tr>
+	</tbody>
+	</table>
+</div>
+</body>
+</html>
